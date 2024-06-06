@@ -1,24 +1,22 @@
-import React, { useState } from "react";
-import { Table, Button, Tooltip, message } from "antd";
-import { EyeTwoTone, EditTwoTone } from "@ant-design/icons";
-import EditLicenseModalForm from "../EditLicenseModalForm/EditLicenseModalForm.tsx";
-import { DataType } from "../../../pages/License/License";
-import styles from "./licenseTable.module.css";
+import React, { useState } from 'react';
+import { Table, Button, Tooltip, Tag, Input } from 'antd';
+import { EyeTwoTone, EditTwoTone } from '@ant-design/icons';
+import EditLicenseModalForm from '../EditLicenseModalForm/EditLicenseModalForm.tsx';
+import { DataType } from '../../../pages/License/License';
+import styles from './licenseTable.module.css';
+
 
 interface LicenseTableProps {
   data: DataType[];
   handleUpdateLicense: (updatedLicense: DataType) => void;
   handleView: (license: DataType) => void;
+  statuses: { id: number; title: string }[];
 }
 
-const LicenseTable: React.FC<LicenseTableProps> = ({
-  data,
-  handleUpdateLicense,
-  handleView,
-  statuses,
-}) => {
+const LicenseTable: React.FC<LicenseTableProps> = (props) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [selectedLicense, setSelectedLicense] = useState<DataType | null>(null);
+  const [searchText, setSearchText] = useState('');
 
   const showEditModal = (license: DataType) => {
     setSelectedLicense(license);
@@ -35,56 +33,79 @@ const LicenseTable: React.FC<LicenseTableProps> = ({
     setSelectedLicense(null);
   };
 
-  const findTitleById = (id: number) => {
-    const status = statuses.find((status) => status.id === id);
-    return status ? status.title : id.toString(); 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
+
+  const findStatusColor = (statusId: number) => {
+    switch (statusId) {
+      case 1:
+        return 'green';
+      case 2:
+        return 'yellow';
+      case 3:
+        return 'red';
+      default:
+        return 'default';
+    }
   };
 
   const columns = [
     {
-      title: "№",
-      key: "index",
+      title: '№',
+      key: 'index',
       render: (_: any, __: any, index: number) => index + 1,
     },
     {
-      title: "Номер регистрации",
-      dataIndex: "number_register",
-      key: "number_register",
+      title: 'Номер регистрации',
+      dataIndex: 'number_register',
+      key: 'number_register',
     },
     {
-      title: "Наименование юр лиц",
-      dataIndex: "name_entity",
-      key: "name_entity",
+      title: 'Наименование юр лиц',
+      dataIndex: 'name_entity',
+      key: 'name_entity',
     },
     {
-      title: "Идентификационный номер",
-      dataIndex: "tax_name",
-      key: "tax_name",
+      title: 'Идентификационный номер',
+      dataIndex: 'tax_name',
+      key: 'tax_name',
     },
     {
-      title: "Юридический адрес",
-      dataIndex: "entity_address",
-      key: "entity_address",
+      title: 'Юридический адрес',
+      dataIndex: 'entity_address',
+      key: 'entity_address',
     },
     {
-      title: "Адрес реализационной программы",
-      dataIndex: "address_program",
-      key: "address_program",
+      title: 'Адрес реализационной программы',
+      dataIndex: 'address_program',
+      key: 'address_program',
     },
     {
-      title: "Статус",
-      dataIndex: "code_status_id",
-      key: "code_status_id",
-      render: (statusId: number) => findTitleById(statusId),
+      title: 'Статус',
+      dataIndex: 'code_status_id',
+      key: 'code_status_id',
+      render: (statusId: number) => {
+        const statusTitle =
+          statusId === 1 ? 'Выдан' : statusId === 2 ? 'Приостановлено' : statusId === 3 ? 'Анулировано' : 'Другой статус';
+        const color = findStatusColor(statusId);
+        return <Tag color={color}>{statusTitle}</Tag>;
+      },
+      filters: [
+        { text: 'Выдан', value: 1 },
+        { text: 'Приостановлено', value: 2 },
+        { text: 'Анулировано', value: 3 },
+      ],
+      onFilter: (value: number, record: DataType) => record.code_status_id === value,
     },
     {
-      title: "Действия",
-      dataIndex: "",
-      key: "action",
+      title: 'Действия',
+      dataIndex: '',
+      key: 'action',
       render: (_: any, record: DataType) => (
         <span>
           <Tooltip title="Просмотр">
-            <Button onClick={() => handleView(record)}>
+            <Button onClick={() => props.handleView(record)}>
               <EyeTwoTone />
             </Button>
           </Tooltip>
@@ -98,12 +119,23 @@ const LicenseTable: React.FC<LicenseTableProps> = ({
     },
   ];
 
+  const filteredData = props.data.filter(item =>
+    item.name_entity.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <>
+      <Input.Search
+        placeholder="Введите текст для поиска"
+        allowClear
+        onChange={handleSearch}
+        style={{ marginBottom: 16 }}
+        className={styles.search}
+      />
       <Table
         className={styles.table}
         columns={columns}
-        dataSource={data}
+        dataSource={filteredData}
         pagination={{ pageSize: 20 }}
         rowKey="id"
       />
@@ -113,7 +145,7 @@ const LicenseTable: React.FC<LicenseTableProps> = ({
           onOk={handleEditModalOk}
           onCancel={handleEditModalCancel}
           license={selectedLicense}
-          onUpdateLicense={handleUpdateLicense}
+          onUpdateLicense={props.handleUpdateLicense}
         />
       )}
     </>

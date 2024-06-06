@@ -2,21 +2,24 @@
     background-color: #fff;
     color: #000;
     border: none;
-    padding:  16px;
+    padding:  30px;
     cursor: pointer;
     border-radius: 12px;
-    width: 297px;
-    height: 50px;
-    position: absolute;
+    width: 200px;
+    height: 60px;
     bottom: 10px; 
-    left: 50%;
     transform: translateX(-50%); 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Lato", sans-serif;
-  }
-  
-  .logoutButton:hover {
-    background-color: #e55353;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+    svg{
+      width: 25px;
+      height: 25px;
+      color: rgb(33, 144, 228);
+      ;
+    }
   }

@@ -1,22 +1,27 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { clearToken } from '../../../utils/redux/reducers/authSlice.ts';
-
+import { Button  } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
 import styles from './button.module.css';
 
-const Button = () => {
+const ButtonExit = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(clearToken()); 
- 
   };
 
   return (
-    <button className={styles.logoutButton} onClick={handleLogout}>
+    <Button
+      className={styles.logoutButton}
+      type="default"
+      onClick={handleLogout}
+      icon={<LogoutOutlined />}
+    >
       Выйти
-    </button>
+    </Button>
   );
 };
 
-export default Button;
+export default ButtonExit;

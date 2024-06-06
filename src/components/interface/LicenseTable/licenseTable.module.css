@@ -2,9 +2,20 @@
     padding: 10px 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 98%;
-    margin: 0 17px;
+    margin: 17px 17px;
     border-radius: 10px;
+}
 
+.search{
+   padding: 0px 15px;
+
+   input{
+    height: 40px;
+   }
+  button{
+   
+    height: 50px!important;
+  }
 }
 
 td{
@@ -13,3 +24,4 @@ td{
         gap: 10px;
     }
 }
+

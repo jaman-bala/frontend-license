@@ -23,7 +23,7 @@ const StatusSelect: React.FC<StatusSelectProps> = ({ name, value, onChange }) =>
     const fetchStatuses = async () => {
       setLoading(true);
       try {
-        const response = await axios.get<Status[]>("http://127.0.0.1:8000/api/status");
+        const response = await axios.get<Status[]>("https://license.tsvs.kg/api/status");
         setStatuses(response.data);
       } catch (error) {
         console.error("Error fetching statuses:", error);

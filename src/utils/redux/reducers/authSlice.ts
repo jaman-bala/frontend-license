@@ -25,7 +25,7 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/api/token?username=${credentials.username}&password=${credentials.password}`,
+        `https://license.tsvs.kg/api/api/token?username=${credentials.username}&password=${credentials.password}`,
         null,
         {
           headers: {

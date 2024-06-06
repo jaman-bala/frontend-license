@@ -35,7 +35,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
   const onFinish = async (formData: any) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/licenses",
+        "https://license.tsvs.kg/api/licenses",
         formData
       );
       console.log(response.data);

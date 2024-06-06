@@ -25,19 +25,15 @@ const AdminMenu: React.FC = () => {
   ];
 
   return (
-    <Menu className={styles.menu} mode="vertical">
-      {items.map((item) => (
-        <Menu.Item
-          className={styles.menu__item}
-          key={item.key}
-          icon={item.icon}
-        >
-          <Link to={item.to}>{item.label}</Link>
-        </Menu.Item>
-      ))}
-      <UserInfo/>
-      <Button/>
-    </Menu>
+    <div className={styles.menu}>
+      <Menu mode="vertical">
+        {items.map((item) => (
+          <Menu.Item className={styles.menu__item} key={item.key} icon={item.icon}>
+            <Link to={item.to}>{item.label}</Link>
+          </Menu.Item>
+        ))}
+      </Menu>
+    </div>
   );
 };
 

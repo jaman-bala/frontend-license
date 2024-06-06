@@ -38,7 +38,7 @@ const EditLicenseModalForm: React.FC<ModalFormProps> = ({
   const onFinish = async (formData: DataType) => {
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/licenses/${license?.id}`,
+        `https://license.tsvs.kg/api/licenses/${license?.id}`,
         formData
       );
       if (response.status === 200) {
@@ -61,7 +61,7 @@ const EditLicenseModalForm: React.FC<ModalFormProps> = ({
       footer={null}
       className={styles.content}
     >
-      <Form form={form} onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish} >
         <Form.Item
           label="Регистрационный № лицензии"
           name="number_register"

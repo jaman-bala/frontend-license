@@ -23,7 +23,7 @@ const IssuingSelect: React.FC<IssuingSelectProps> = ({ name, value, onChange }) 
     const fetchRegions = async () => {
       setLoading(true);
       try {
-        const response = await axios.get<Region[]>("http://127.0.0.1:8000/api/issuing");
+        const response = await axios.get<Region[]>("https://license.tsvs.kg/api/issuing");
         setRegions(response.data);
       } catch (error) {
         console.error("Error fetching regions:", error);
