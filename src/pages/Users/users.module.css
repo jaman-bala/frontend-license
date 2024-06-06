@@ -1,0 +1,15 @@
+.title{
+    color: #000;
+    text-align: left;
+    padding: 20px;
+}
+
+.table{
+    padding: 0px 20px;
+}
+
+.primary__btn{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 20px;
+}

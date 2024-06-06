@@ -1,0 +1,36 @@
+.info {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: #000;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 40px;
+    width: 297px;
+    position: absolute;
+    bottom: 75px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    cursor: pointer;
+  }
+  
+  
+  .logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 16px;
+  }
+  
+  .fio {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .fio p {
+    margin: 4px 0;
+  }
+  
+  

@@ -1,0 +1,6 @@
+.content {
+  text-align: center;
+  min-height: calc(100vh - 70px);
+  color: #fff;
+  background-color: #fff;
+}

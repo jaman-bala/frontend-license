@@ -1,0 +1,40 @@
+.content {
+  width: 1400px !important;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 50px;
+}
+
+.column__left {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.column__right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  display: flex;
+}
+
+.item {
+  :global {
+    .ant-row {
+      .ant-form-item-row {
+        flex-direction: column!important;
+      }
+    }
+
+    .ant-row {
+      flex-direction: column!important;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .form{
+    width: 400px;
+    padding: 10px;
+  }
+
+  .title{
+    padding: 0 15px;
+  }
+  
+  .form__wrapper {
+    width: 300px;
+  }
+  
+  .form__item {
+    margin-bottom: 16px;
+  }
+  
+  .btn__submit {
+    width: 100%;
+  }
+  

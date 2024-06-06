@@ -1,0 +1,15 @@
+.table{
+    padding: 10px 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 98%;
+    margin: 0 17px;
+    border-radius: 10px;
+
+}
+
+td{
+    span{
+        display: flex;
+        gap: 10px;
+    }
+}
