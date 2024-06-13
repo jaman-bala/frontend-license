@@ -13,7 +13,7 @@ export default function Cards() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://license.tsvs.kg/api/licenses");
+        const response = await axios.get("http://127.0.0.1:8000/api/licenses");
         const licenses = response.data;
 
         const issued = licenses.filter(
@@ -47,12 +47,14 @@ export default function Cards() {
               background:
                 "linear-gradient(195deg, rgb(102, 187, 106), rgb(67, 160, 71))",
               borderRadius: "8px",
-              boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
             }}
             className={styles.card}
             bordered={false}
           >
             <Statistic
+            className={styles.card__title}
               title="Выдано лицензий"
               value={licenseStats.issued}
               valueStyle={{ color: "#fff" }}
@@ -62,14 +64,16 @@ export default function Cards() {
         <Col span={8}>
           <Card
             style={{
-              background: "#f9b115",
+              background: "#ffb703",
               borderRadius: "8px",
-              boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
             }}
             className={styles.card}
             bordered={false}
           >
             <Statistic
+            className={styles.card__title}
               title="Приостановлено"
               value={licenseStats.suspended}
               valueStyle={{ color: "#fff" }}
@@ -79,14 +83,16 @@ export default function Cards() {
         <Col span={8}>
           <Card
             style={{
-              background: "#e55353",
+              background: "#ef233c",
               borderRadius: "8px",
-              boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
             }}
             className={styles.card}
             bordered={false}
           >
             <Statistic
+              className={styles.card__title}
               title="Анулировано"
               value={licenseStats.revoked}
               valueStyle={{ color: "#fff" }}

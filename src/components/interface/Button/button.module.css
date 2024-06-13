@@ -5,8 +5,8 @@
     padding:  30px;
     cursor: pointer;
     border-radius: 12px;
-    width: 200px;
-    height: 60px;
+    width: 140px;
+    height: 40px;
     bottom: 10px; 
     transform: translateX(-50%); 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -18,7 +18,7 @@
     margin-top: 20px;
     svg{
       width: 25px;
-      height: 25px;
+      height: 20px;
       color: rgb(33, 144, 228);
       ;
     }

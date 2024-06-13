@@ -8,7 +8,8 @@ import License from './pages/License/License.tsx';
 import Users from './pages/Users/Users.tsx';
 import SignIn from './pages/SignIn/SignIn.tsx';
 import PrivateRoute from "./utils/routing/privateRouting.tsx";
-import NotFound from "./pages/NotFound/NotFound.tsx"; 
+import LoginRoute from "./utils/routing/loginRoute.tsx";
+import NotFound from "./pages/NotFound/NotFound.tsx";
 
 const AdminLayout = () => (
   <Layout>
@@ -26,7 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<SignIn />} />
+        <Route path="/login" element={<LoginRoute component={SignIn} />} />
         <Route path="/" element={<PrivateRoute component={AdminLayout} />}>
           <Route index element={<License />} />
           <Route path="users" element={<Users />} />

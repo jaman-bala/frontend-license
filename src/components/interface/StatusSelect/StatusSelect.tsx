@@ -11,11 +11,12 @@ const { Option } = Select;
 
 interface StatusSelectProps {
   name: string;
-  value?: number; // Пропс для текущего значения статуса
+  value?: number;
   onChange?: (value: number) => void;
+  disabled?: boolean;
 }
 
-const StatusSelect: React.FC<StatusSelectProps> = ({ name, value, onChange }) => {
+const StatusSelect: React.FC<StatusSelectProps> = ({ name, value, onChange, disabled }) => {
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -49,6 +50,7 @@ const StatusSelect: React.FC<StatusSelectProps> = ({ name, value, onChange }) =>
       style={{ width: "100%" }}
       value={value} 
       onChange={handleSelectChange}
+      disabled={disabled}
     >
       {statuses.map((status) => (
         <Option key={status.id} value={status.id}>

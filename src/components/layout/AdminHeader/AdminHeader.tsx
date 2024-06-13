@@ -14,7 +14,7 @@ const AdminHeader = () => {
     <Header className={styles.header}>
       <div className={styles.header__left}>
         <img className={styles.logo} src={logo} alt="Logo" />
-        <h2 className={styles.header__title}>GARTSVS LICENSE DATABASE</h2>
+        <h2 className={styles.header__title}>АИС ЛИЦЕНЗИЙ ГА РТСВС</h2>
       </div>
       <div className={styles.header__right}>
         <UserInfo/>

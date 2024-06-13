@@ -1,3 +1,92 @@
-.content{
-    width: 930px!important;
-}
+.content {
+    width: 1400px !important;
+  }
+  
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+  }
+  
+  .column__left {
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .column__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  
+  .bottom__left {
+    height: auto;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 635px;
+    
+  }
+  
+  .bottom__right {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    width: 676px;
+    height: max-content;
+    border-radius: 15px;
+   
+  }
+
+  .schoolDataRow{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 15px;
+    padding: 20px;
+  }
+  
+  .btnContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .submit {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .add {
+    width: 40px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+  }
+  
+  .close {
+    width: 90px;
+    height: 30px;
+  }
+  
+  .btnCont{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 0 10px;
+  }
+  
+  .sendBtn{
+    width: 200px;
+    height: 40px;
+  }
+  
+  

@@ -1,43 +1,104 @@
-/* editLicenseModalForm.module.css */
-
 .content {
-    width: 1400px !important;
-  }
-  
-  .form {
+  width: 1400px !important;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+}
+
+.item {
+  flex-direction: column;
+}
+
+.column__left {
+  display: flex;
+  flex-direction: column;
+  width: 47%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.column__right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.bottom__left {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 635px;
+}
+
+.bottom__left_card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.bottom__right {
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  width: 676px;
+  height: 270px;
+  border-radius: 15px;
+  flex-wrap: wrap;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.submit {
+  display: flex;
+  align-items: flex-end;
+}
+
+.add {
+  width: 40px;
+  height: 30px;
+  align-items: center;
+  display: flex;
+}
+
+.addCategoryBtn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button {
+ 
+    height: 40px;
+    text-align: center;
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 50px;
+    align-items: center;
   }
-  
-  .column__left {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-  }
-  
-  .column__right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .bottom {
-    display: flex;
-  }
-  
-  .item {
-    :global {
-      .ant-row {
-        .ant-form-item-row {
-          flex-direction: column!important;
-        }
-      }
-  
-      .ant-row {
-        flex-direction: column!important;
-      }
-    }
-  }
-  
+}
+
+.close {
+  width: 90px;
+  height: 30px;
+}
+
+.btnCont {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 0 10px;
+}
+
+.sendBtn {
+  width: 200px;
+  height: 40px;
+}

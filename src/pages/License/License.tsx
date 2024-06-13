@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "antd";
 import axios from "axios";
 import styles from "./license.module.css";
 import Cards from "../../components/interface/Cards/Cards.tsx";
 import ModalForm from "../../components/interface/AddLicenseModalForm/AddLicenseModalForm.tsx";
 import LicenseTable from "../../components/interface/LicenseTable/LicenseTable.tsx";
 import ViewLicenseModal from "../../components/interface/ViewLicenseModal/ViewLicenseModal.tsx";
-import { PlusCircleTwoTone } from '@ant-design/icons';
 
 export interface DataType {
   id: React.Key;
@@ -15,22 +13,18 @@ export interface DataType {
   tax_name: string;
   entity_address: string;
   address_program: string;
-  cipher: string;
-  title_school: string;
-  quantity_school: string;
   issuing_license: string;
   data_license: string;
   form_number: string;
-  form_number_suspended: string;
-  form_number_start: string;
-  form_number_stop: string;
   data_address: string;
   form_number_data: string;
+  title_school: string[];
+  quantity_school: string[];
   file: string;
-  issuing_authorities_id: number;
-  regions_id: number;
-  quantities_id: number;
-  code_status_id: number;
+  issuing_authorities: { id: number, title: string };
+  regions: { id: number, title: string };
+  quantities: { id: number, title: string };
+  code_status: { id: number, title: string };
 }
 
 const License: React.FC = () => {
@@ -40,23 +34,25 @@ const License: React.FC = () => {
   const [currentLicense, setCurrentLicense] = useState<DataType | null>(null);
   const [issuingAuthorities, setIssuingAuthorities] = useState<{ id: number, title: string }[]>([]);
   const [regions, setRegions] = useState<{ id: number, title: string }[]>([]);
-  const [quantities, setQuantities] = useState<{ id: number, title: string }[]>([]);
   const [statuses, setStatuses] = useState<{ id: number, title: string }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [licensesResponse, authoritiesResponse, regionsResponse, quantitiesResponse, statusesResponse] = await Promise.all([
+        const [
+          licensesResponse,
+          authoritiesResponse,
+          regionsResponse,
+          statusesResponse
+        ] = await Promise.all([
           axios.get("https://license.tsvs.kg/api/licenses"),
           axios.get("https://license.tsvs.kg/api/issuing"),
           axios.get("https://license.tsvs.kg/api/regions"),
-          axios.get("https://license.tsvs.kg/api/quantities"),
           axios.get("https://license.tsvs.kg/api/status")
         ]);
         setData(licensesResponse.data);
         setIssuingAuthorities(authoritiesResponse.data);
         setRegions(regionsResponse.data);
-        setQuantities(quantitiesResponse.data);
         setStatuses(statusesResponse.data);
       } catch (error) {
         console.error("There was an error fetching the data!", error);
@@ -70,26 +66,12 @@ const License: React.FC = () => {
     setData([...data, newLicense]);
   };
 
-  const showModal = () => {
-    setVisible(true);
-  };
-
   const handleOk = () => {
     setVisible(false);
   };
 
   const handleCancel = () => {
     setVisible(false);
-  };
-
-  const onFinish = async (values: any) => {
-    try {
-      const response = await axios.post("https://license.tsvs.kg/api/licenses", values);
-      setData([...data, { id: response.data.id, ...values }]);
-      setVisible(false);
-    } catch (error) {
-      console.error("There was an error adding the data!", error);
-    }
   };
 
   const handleUpdateLicense = (updatedLicense: DataType) => {
@@ -116,30 +98,27 @@ const License: React.FC = () => {
 
   return (
     <>
-      <div className={styles.top}><h2 className={styles.title}>Таблица с данными о лицензиях</h2>
-      <Button
-          className={styles.primary__btn}
-         
-          onClick={showModal}
-          style={{ marginBottom: 16 }}
-        >
-          <PlusCircleTwoTone />
-          Добавить
-        </Button></div>
-      <Cards />
-      <div className={styles.btn}>
-       
+      <div className={styles.top}>
+        <h2 className={styles.title}>Таблица с данными о лицензиях</h2>
       </div>
-      <ModalForm visible={visible} onOk={handleOk} onCancel={handleCancel} onFinish={onFinish} onAddLicense={handleAddLicense} />
-      <LicenseTable data={data} statuses={statuses} handleUpdateLicense={handleUpdateLicense} handleView={handleView} handleDelete={handleDelete} />
+      <Cards />
+      <LicenseTable
+        data={data}
+        statuses={statuses}
+        handleUpdateLicense={handleUpdateLicense}
+        handleView={handleView}
+        handleDelete={handleDelete}
+        onAddLicense={handleAddLicense}
+        showModal={() => setVisible(true)}
+      />
+      <ModalForm visible={visible} onOk={handleOk} onCancel={handleCancel} onAddLicense={handleAddLicense} />
       {currentLicense && (
         <ViewLicenseModal
           visible={viewVisible}
           onCancel={() => setViewVisible(false)}
-          license={currentLicense}ф
+          license={currentLicense}
           issuingAuthorities={issuingAuthorities}
           regions={regions}
-          quantities={quantities}
           statuses={statuses}
         />
       )}

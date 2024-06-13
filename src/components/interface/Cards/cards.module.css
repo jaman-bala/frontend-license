@@ -1,11 +1,15 @@
-.row{
-    padding: 20px 20px;
-    margin-right: 0!important;
-    padding-right: 0!important;
-    
+.row {
+  padding: 20px 20px;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
 }
 
-.card{
-    height: 125px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+.card {
+  height: 125px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.card__title {
+  color: #fff!important;
 }

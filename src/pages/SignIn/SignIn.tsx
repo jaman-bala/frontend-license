@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/redux/reducers/authSlice.ts";
 import { RootState, AppDispatch } from "../../utils/redux/store";
 import { unwrapResult } from "@reduxjs/toolkit";
-
 import styles from "./signIn.module.css";
+import img from "../../assets/img/v3.png";
+
+const { Title, Text } = Typography;
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -17,8 +19,10 @@ const SignIn = () => {
   const onFinish = async (values: { username: string; password: string }) => {
     try {
       const resultAction = await dispatch(login(values));
-      const token = unwrapResult(resultAction);
-      localStorage.setItem("accessToken", token);
+      const { accessToken, refreshToken } = unwrapResult(resultAction);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("username", values.username);  // Save username for future use
       navigate("/");
     } catch (err: any) {
       console.error("Failed to login: ", err);
@@ -27,31 +31,29 @@ const SignIn = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.form__wrapper}>
-        <h2 className={styles.title}>License Database</h2>
+    <div className={styles.wrapper}>
+      <div className={styles.form}>
+        <img src={img} className={styles.logo} alt="title" />
+        <Title order={2} className={styles.title} level={2}>
+          АИС Лицензий
+        </Title>
         <Form
           name="signInForm"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          className={styles.form}
         >
           <Form.Item
-            label="Логин"
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-            className={styles.form__item}
+            rules={[{ required: true, message: "Пожалуйста введите логин" }]}
           >
-            <Input />
+            <Input size="large" placeholder="Логин" />
           </Form.Item>
 
           <Form.Item
-            label="Пароль"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-            className={styles.form__item}
+            rules={[{ required: true, message: "Пожалуйста введите пароль" }]}
           >
-            <Input.Password />
+            <Input.Password size="large" placeholder="Пароль" />
           </Form.Item>
 
           {serverError && <p className={styles.error}>{serverError}</p>}
@@ -60,14 +62,19 @@ const SignIn = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className={styles.btn__submit}
+              size="large"
               loading={loading}
+              block
             >
               Войти
             </Button>
           </Form.Item>
         </Form>
+        <Text style={{ textAlign: "left", display: "block", color: "gray" }}>
+          *Для получения логина и пароля обратитесь к IT отдел
+        </Text>
       </div>
+      <div className={styles.image} />
     </div>
   );
 };

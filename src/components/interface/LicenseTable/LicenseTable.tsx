@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Table, Button, Tooltip, Tag, Input } from 'antd';
-import { EyeTwoTone, EditTwoTone } from '@ant-design/icons';
+import { EyeTwoTone, EditTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 import EditLicenseModalForm from '../EditLicenseModalForm/EditLicenseModalForm.tsx';
 import { DataType } from '../../../pages/License/License';
 import styles from './licenseTable.module.css';
-
 
 interface LicenseTableProps {
   data: DataType[];
   handleUpdateLicense: (updatedLicense: DataType) => void;
   handleView: (license: DataType) => void;
+  handleDelete: (key: React.Key) => void;
   statuses: { id: number; title: string }[];
+  showModal: () => void;
+  onAddLicense: (newLicense: DataType) => void;
 }
 
 const LicenseTable: React.FC<LicenseTableProps> = (props) => {
@@ -34,7 +36,7 @@ const LicenseTable: React.FC<LicenseTableProps> = (props) => {
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    setSearchText(e.target.value.toLowerCase());
   };
 
   const findStatusColor = (statusId: number) => {
@@ -120,18 +122,31 @@ const LicenseTable: React.FC<LicenseTableProps> = (props) => {
   ];
 
   const filteredData = props.data.filter(item =>
-    item.name_entity.toLowerCase().includes(searchText.toLowerCase())
+    columns.some(column => {
+      const dataIndex = column.dataIndex;
+      return dataIndex && item[dataIndex]?.toString().toLowerCase().includes(searchText);
+    })
   );
 
   return (
     <>
-      <Input.Search
-        placeholder="Введите текст для поиска"
-        allowClear
-        onChange={handleSearch}
-        style={{ marginBottom: 16 }}
-        className={styles.search}
-      />
+      <div className={styles.top}>
+        <Input.Search
+          placeholder="Введите текст для поиска"
+          allowClear
+          onChange={handleSearch}
+          style={{ marginBottom: 16 }}
+          className={styles.search}
+        />
+        <Button
+          className={styles.primary__btn}
+          onClick={props.showModal}
+          style={{ marginBottom: 16 }}
+        >
+          <PlusCircleTwoTone />
+          Добавить
+        </Button>
+      </div>
       <Table
         className={styles.table}
         columns={columns}
